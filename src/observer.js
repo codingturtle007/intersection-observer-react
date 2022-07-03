@@ -4,12 +4,10 @@ const MyObserver = (options) => {
   const ref_container = useRef(null);
   const [ is_visible, setIsVisible ] = useState(false);
 
-  const callbackFunction = (entries) => {
-    setIsVisible(entries[0].isIntersecting);
-  }
-
   useEffect(() => {
-    const observer = new IntersectionObserver(callbackFunction, options);
+    const observer = new IntersectionObserver(entries => {
+      setIsVisible(entries[0].isIntersecting);
+    }, options);
 
     if(ref_container.current) {
       observer.observe(ref_container.current);      
@@ -18,11 +16,12 @@ const MyObserver = (options) => {
     return () => {
       if(observer) {
         observer.unobserve(ref_container.current);
+        observer.disconnect();
       }
     }
   }, [ref_container.current]);
 
-  return [is_visible, ref_container];
+  return [is_visible, ref_container]
 }
 
 export default MyObserver;

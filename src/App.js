@@ -9,7 +9,7 @@ function App() {
   const  [is_visible, ref_container] = MyObserver({
     root: null,
     rootMargin: '0px',
-    threshold: 1    
+    threshold: 1
   });
 
   useEffect(() => {
@@ -25,9 +25,11 @@ function App() {
       <h2 className="m-4">Intersection observer in react!</h2>
       <h4>Infinite Scrolling</h4>
       {
-        demo_cards.map(card => <Card value={card.index} url={card.url} />)
+        demo_cards.map(card => 
+          <Card value={card.index} url={card.url} />
+        )
       }
-      <div ref={ ref_container } />
+      <div ref={ref_container} style={{ height: '1px' }} />
     </div>
   );
 }

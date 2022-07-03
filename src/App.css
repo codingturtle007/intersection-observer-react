@@ -8,3 +8,7 @@
 .App .card {
   width: 20em;
 }
+
+.last-elem {
+  height: 20px;
+}
